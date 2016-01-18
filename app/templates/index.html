@@ -2,10 +2,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ user.nickname }}!</h1>
-    {% for post in posts %}
-    <p>
-      {{ post.author.nickname }} says: <b>{{ post.body }}</b>
-    </p>
+
+    {% for user in users %}
+        <hr>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Middle Name: {{ user.middle_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        <p>Gender: {{ user.gender }}</p>
+        <p>Date of Birth: {{ user.dob }}</p>
+        <p>Blood Group: {{ user.blood_group }}</p>
+        <p>Address: {{ user.address }}</p>
+        <p>City: {{ user.city }}</p>
+        <p>Country: {{ user.country }}</p>
+        <p>Pincode: {{ user.pincode }}</p>
+        <p>Mobile NO: {{ user.mobile_number }}</p>
     {% endfor %}
 {% endblock %}

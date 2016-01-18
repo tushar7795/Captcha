@@ -9,21 +9,10 @@ from .models import Doctor
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}
-    posts = [
-        {
-            'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
+    users = Doctor.query.all()
     return render_template('index.html',
                            title='Home',
-                           user=user,
-                           posts=posts)
+                           users=users)
 
 
 # @app.route('/login', methods=['GET', 'POST'])
@@ -58,7 +47,7 @@ def register():
                     middle_name=form.middle_name.data,
                     last_name=form.last_name.data,
                     gender=form.gender.data[0],
-                    dob=form.birthdate.data.strftime("%d/%m/%Y"),
+                    dob=form.birthdate.data,
                     blood_group=form.blood_group.data,
                     mobile_number=form.mobile_number.data,
                     pincode=form.pincode.data,
