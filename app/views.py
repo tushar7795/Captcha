@@ -3,6 +3,10 @@ from app import app, db
 # from .forms import LoginForm
 from .forms import RegistrationForm
 from .models import Doctor
+import Image
+import ImageDraw
+import ImageFont
+from random import randint
 # from flask_recaptcha import ReCaptcha
 
 
@@ -32,8 +36,11 @@ def index():
 
 @app.route('/registration', methods=['GET', 'POST'])
 def register():
+
     form = RegistrationForm()
-    if form.validate_on_submit():
+    file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'r')
+    random = file.read()
+    if form.validate_on_submit() and form.captcha.data == random:
         flash('%s%s%s%s%s%s%s' % (form.first_name.data,
                                   form.middle_name.data,
                                   form.last_name.data,
@@ -43,6 +50,8 @@ def register():
                                   form.mobile_number.data))
         flash('%s' % form.pincode.data)
         flash('%s' % form.address.data)
+        flash('%s' % form.captcha.data)
+        flash('%s' % random)
         dc = Doctor(first_name=form.first_name.data,
                     middle_name=form.middle_name.data,
                     last_name=form.last_name.data,
@@ -58,11 +67,31 @@ def register():
         db.session.commit()
         flash(' %s %s' % (form.city.data, form.country.data))
         return redirect(url_for('index'))
+    # imgg = random_generator()
     return render_template('registration.html',
                            title='Registration Form',
-                           form=form)
+                           form=form,
+                           img=random_generator())
 
 
 @app.route('/date')
 def datePicker():
     return render_template('datePicker.html')
+
+
+def random_generator():
+    sans16 = ImageFont.truetype('/Users/speedster/codes/Captcha/app/font.ttf', 25)
+    random = ''
+    for i in range(6):
+        r = randint(33, 122)
+        random = random + chr(r)
+    rfile = randint(1, 100)
+
+    im = Image.new("RGB", (200, 50), "#ddd")
+    draw = ImageDraw.Draw(im)
+    draw.text((10, 10), random, font=sans16, fill="red")
+    im.save("/Users/speedster/codes/Captcha/app/static/"+str(rfile)+".png")
+    file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'w')
+    file.write(random)
+    file.close()
+    return str(rfile)+'.png'

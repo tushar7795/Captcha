@@ -81,7 +81,11 @@
             {% endfor %}<br>
         </p>
 		<p>
-			{{ form.recaptcha() }}
+
+			<img src="/static/{{img}}" width="200" height="50">
+		</p>
+		<p>	Enter Capthca:{{ form.captcha }}</p>
+
     	<p><input type="submit" value="Register"></p>
     </form>
 

@@ -4,6 +4,7 @@ from wtforms import StringField, IntegerField, RadioField, SelectField
 from wtforms import TextAreaField
 from wtforms.validators import DataRequired, NumberRange
 from wtforms.fields.html5 import DateField
+
 # from flask_recaptcha import ReCaptcha
 
 
@@ -31,6 +32,9 @@ class RegistrationForm(Form):
     city = StringField('city', validators=[DataRequired()])
     country = StringField('country', validators=[DataRequired()])
     address = TextAreaField('address', validators=[DataRequired()])
-    recaptcha = RecaptchaField()
+    # recaptcha = RecaptchaField()
+    captcha = StringField('captcha', validators=[DataRequired()])
+
+
     # recaptcha = ReCaptcha()
     # remember_me = BooleanField('remember_me', default=False)
