@@ -54,6 +54,19 @@ def register():
                                   form.mobile_number.data))
         flash('%s' % form.pincode.data)
         flash('%s' % form.address.data)
+        dc = Doctor(first_name=form.first_name.data,
+                    middle_name=form.middle_name.data,
+                    last_name=form.last_name.data,
+                    gender=form.gender.data[0],
+                    dob=form.birthdate.data.strftime("%d/%m/%Y"),
+                    blood_group=form.blood_group.data,
+                    mobile_number=form.mobile_number.data,
+                    pincode=form.pincode.data,
+                    address=form.address.data,
+                    city=form.city.data,
+                    country=form.country.data)
+        db.session.add(dc)
+        db.session.commit()
         flash(' %s %s' % (form.city.data, form.country.data))
         return redirect(url_for('index'))
     return render_template('registration.html',
