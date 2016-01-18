@@ -1,11 +1,20 @@
 from app import db
 
 
-class User(db.Model):
+class Doctor(db.Model):
+    __tablename__ = 'doctor_info'
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    first_name = db.Column(db.String(64), nullable=False)
+    middle_name = db.Column(db.String(64), nullable=True)
+    last_name = db.Column(db.String(64), nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
+    dob = db.Column(db.Date(), nullable=False)
+    blood_group = db.Column(db.String(3), nullable=False)
+    mobile_number = db.Column(db.String(10), nullable=False)
+    address = db.Column(db.String(200), nullable=False)
+    city = db.Column(db.String(64), nullable=False)
+    country = db.Column(db.String(64), nullable=False)
+    pincode = db.Column(db.String(6), nullable=False)
 
     @property
     def is_authenticated(self):
@@ -26,14 +35,4 @@ class User(db.Model):
             return str(self.id)  # python 3
 
     def __repr__(self):
-        return '<User %r>' % (self.nickname)
-
-
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Post %r>' % (self.body)
+        return '<User %r>' % (self.first_name)

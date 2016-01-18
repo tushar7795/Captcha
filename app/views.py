@@ -1,11 +1,8 @@
-from flask import render_template, flash, redirect, session, url_for, request
-from flask import g
-from flask.ext.login import login_user, logout_user, current_user
-from flask.ext.login import login_required
+from flask import render_template, flash, redirect, url_for
 from app import app, db
 # from .forms import LoginForm
 from .forms import RegistrationForm
-from .models import User
+from .models import Doctor
 # from flask_recaptcha import ReCaptcha
 
 
