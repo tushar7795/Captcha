@@ -8,6 +8,7 @@ import ImageDraw
 import ImageFont
 from random import randint
 # from flask_recaptcha import ReCaptcha
+import json
 
 
 @app.route('/')
@@ -85,13 +86,23 @@ def random_generator():
     for i in range(6):
         r = randint(33, 122)
         random = random + chr(r)
-    rfile = randint(1, 100)
-
+    # rf = open("/Users/speedster/codes/Captcha/app/static/no.txt", 'r')
+    # rff = rf.read()
+    # rfile = (int(rff) + 1) % 3
     im = Image.new("RGB", (200, 50), "#ddd")
     draw = ImageDraw.Draw(im)
     draw.text((10, 10), random, font=sans16, fill="red")
-    im.save("/Users/speedster/codes/Captcha/app/static/"+str(rfile)+".png")
+    im.save("/Users/speedster/codes/Captcha/app/static/mmm.png")  # +str(rfile)+
     file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'w')
     file.write(random)
+    # rf = open("/Users/speedster/codes/Captcha/app/static/no.txt", 'w')
+    # rf.write(str(rfile))
+    # rf.close()
     file.close()
-    return str(rfile)+'.png'
+    return 'mmm.png?dummy='+str(randint(1, 100000))
+
+
+@app.route('/recaptcha')
+def reCaptcha():
+    url = '/static/'+random_generator()
+    return json.dumps({'url': url}), 200, {'Content-Type': 'application/json'}
