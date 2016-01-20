@@ -2,19 +2,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    {% for user in users %}
-        <hr>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Middle Name: {{ user.middle_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
-        <p>Gender: {{ user.gender }}</p>
-        <p>Date of Birth: {{ user.dob }}</p>
-        <p>Blood Group: {{ user.blood_group }}</p>
-        <p>Address: {{ user.address }}</p>
-        <p>City: {{ user.city }}</p>
-        <p>Country: {{ user.country }}</p>
-        <p>Pincode: {{ user.pincode }}</p>
-        <p>Mobile NO: {{ user.mobile_number }}</p>
-    {% endfor %}
+    <table width="100%">
+        <tr>
+            <td>First Name</td>
+            <td>Middle Name</td>
+            <td>Last Name</td>
+            <td>Gender</td>
+            <td>DOB</td>
+            <td>Blood Group</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>Country</td>
+            <td>Pincode</td>
+            <td>Mobile NO</td>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.middle_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.dob }}</td>
+                <td>{{ user.blood_group }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.city }}</td>
+                <td>{{ user.country }}</td>
+                <td>{{ user.pincode }}</td>
+                <td>{{ user.mobile_number }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

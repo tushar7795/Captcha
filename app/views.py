@@ -42,17 +42,17 @@ def register():
     file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'r')
     random = file.read()
     if form.validate_on_submit() and form.captcha.data == random:
-        flash('%s%s%s%s%s%s%s' % (form.first_name.data,
-                                  form.middle_name.data,
-                                  form.last_name.data,
-                                  form.gender.data,
-                                  form.birthdate.data.strftime("%d/%m/%Y"),
-                                  form.blood_group.data,
-                                  form.mobile_number.data))
-        flash('%s' % form.pincode.data)
-        flash('%s' % form.address.data)
-        flash('%s' % form.captcha.data)
-        flash('%s' % random)
+        # flash('%s%s%s%s%s%s%s' % (form.first_name.data,
+        #                           form.middle_name.data,
+        #                           form.last_name.data,
+        #                           form.gender.data,
+        #                           form.birthdate.data.strftime("%d/%m/%Y"),
+        #                           form.blood_group.data,
+        #                           form.mobile_number.data))
+        # flash('%s' % form.pincode.data)
+        # flash('%s' % form.address.data)
+        # flash('%s' % form.captcha.data)
+        # flash('%s' % random)
         dc = Doctor(first_name=form.first_name.data,
                     middle_name=form.middle_name.data,
                     last_name=form.last_name.data,
@@ -66,7 +66,7 @@ def register():
                     country=form.country.data)
         db.session.add(dc)
         db.session.commit()
-        flash(' %s %s' % (form.city.data, form.country.data))
+        # flash(' %s %s' % (form.city.data, form.country.data))
         return redirect(url_for('index'))
     # imgg = random_generator()
     return render_template('registration.html',
@@ -81,7 +81,7 @@ def datePicker():
 
 
 def random_generator():
-    sans16 = ImageFont.truetype('/Users/speedster/codes/Captcha/app/font.ttf', 25)
+    sans16 = ImageFont.truetype('/Users/speedster/codes/Captcha/app/arial.ttf', 25)
     random = ''
     for i in range(6):
         r = randint(33, 122)
@@ -92,6 +92,11 @@ def random_generator():
     im = Image.new("RGB", (200, 50), "#ddd")
     draw = ImageDraw.Draw(im)
     draw.text((10, 10), random, font=sans16, fill="red")
+    draw.line((0, 50, 200, 0), fill=128)
+    draw.line((0, 200, 50, 0), fill=128)
+    draw.line((30, 50, 200, 20), fill=128)
+    # draw.line((0, 50, 200, 0), fill=128)
+
     im.save("/Users/speedster/codes/Captcha/app/static/mmm.png")  # +str(rfile)+
     file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'w')
     file.write(random)

@@ -1,7 +1,7 @@
 from flask.ext.wtf import Form
 from flask.ext.wtf.recaptcha import RecaptchaField
 from wtforms import StringField, IntegerField, RadioField, SelectField
-from wtforms import TextAreaField
+from wtforms import TextAreaField, SubmitField
 from wtforms.validators import DataRequired, NumberRange
 from wtforms.fields.html5 import DateField
 
@@ -34,7 +34,7 @@ class RegistrationForm(Form):
     address = TextAreaField('address', validators=[DataRequired()])
     # recaptcha = RecaptchaField()
     captcha = StringField('captcha', validators=[DataRequired()])
-
+    # submit = SubmitField('Register')
 
     # recaptcha = ReCaptcha()
     # remember_me = BooleanField('remember_me', default=False)
