@@ -41,72 +41,92 @@
     <h1>Register</h1>
     <form action="" method="post" name="registration" >
     	{{ form.hidden_tag() }}
-    	<p>First Name: {{ form.first_name(size=30) }}
+		<table>
+    	<tr>
+			<td align="right">First Name:</td>
+			<td>{{ form.first_name(size=30) }}
     		{% for error in form.first_name.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-    	</p>
-    	<p>Middle Name: {{ form.middle_name(size=30) }}
+            {% endfor %}</td>
+    	</tr>
+    	<tr><td align="right">Middle Name: </td>
+			<td>{{ form.middle_name(size=30) }}
     		{% for error in form.middle_name.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-    	</p>
-    	<p>Last Name: {{ form.last_name(size=30) }}
+            {% endfor %}</td>
+    	</tr>
+    	<tr><td align="right">Last Name: </td>
+			<td>{{ form.last_name(size=30) }}
     		{% for error in form.last_name.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-    	</p>
-    	<p>Gender:{{ form.gender }}
+            {% endfor %}</td>
+    	</tr>
+    	<tr><td align="right">Gender:</td>
+			<td>{{ form.gender }}
     		{% for error in form.gender.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-    	</p>
-    	<p>Birth Date: {{ form.birthdate(class='datepicker') }}
+            {% endfor %}</td>
+    	</tr>
+    	<tr><td align="right">Birth Date: </td>
+			<td>{{ form.birthdate(class='datepicker') }}
     		{% for error in form.birthdate.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-    	</p>
+            {% endfor %}</td>
+    	</tr>
 
-        <p>Blood Group: {{ form.blood_group}}
+        <tr><td align="right">Blood Group: </td>
+			<td>{{ form.blood_group}}
             {% for error in form.blood_group.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
+            {% endfor %}</td>
+        </tr>
 
-        <p>Mobile Number: {{ form.mobile_number}}
+        <tr><td align="right">Mobile Number: </td>
+			<td>{{ form.mobile_number}}
             {% for error in form.mobile_number.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>Address: {{ form.address}}
+            {% endfor %}</td>
+        </tr>
+        <tr><td align="right">Address: </td>
+			<td>{{ form.address}}
             {% for error in form.address.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>City: {{ form.city(size=25)}}
+            {% endfor %}</td>
+        </tr>
+        <tr><td align="right">City: </td>
+			<td>{{ form.city(size=25)}}
             {% for error in form.city.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>Country: {{ form.country(size=25)}}
+            {% endfor %}</td>
+        </tr>
+        <tr><td align="right">Country: </td>
+			<td>{{ form.country(size=25)}}
             {% for error in form.country.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
+            {% endfor %}</td>
+        </tr>
 
-        <p>Pin Code: {{ form.pincode}}
+        <tr><td align="right">Pin Code: </td>
+			<td>{{ form.pincode}}
             {% for error in form.pincode.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-		<p>
+            {% endfor %}</td>
+        </tr>
+		<tr>
+			<td></td>
+			<td><div><img id='img' src="/static/{{img}}" width="200" height="50"></div>
+			<button type="button">ReCaptcha</button></td>
+		</tr>
+		<tr>
+		<td align="right">Enter Capthca:</td>
+		<td>{{ form.captcha }}
+			{% for error in form.captcha.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}</td></tr>
 
-			<div><img id='img' src="/static/{{img}}" width="200" height="50"></div>
-			<button type="button">ReCaptcha</button>
-		</p>
-		<p>	Enter Capthca:{{ form.captcha }}</p>
-
-    	<p><input type="submit" value="Register"></p>
+    	<tr>
+			<td></td><td><input type="submit" value="Register"></td></tr>
+	</table>
     </form>
 
 {% endblock %}
