@@ -86,7 +86,7 @@ def register():
         # flash(' %s %s' % (form.city.data, form.country.data))
         return redirect(url_for('index'))
     elif form.validate_on_submit() and form.captcha.data != session['captcha']:
-        form.captcha.errors.append("Please enter valid captcha  "+session['captcha'])
+        form.captcha.errors.append("Please enter valid captcha")
     (imgg, session['captcha']) = random_generator()
     return render_template('registration.html',
                            title='Registration Form',
