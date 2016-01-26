@@ -20,7 +20,7 @@
 
 	<script type=text/javascript>
 		$(function() {
-			$('button').click(function() {
+			$('button#recaptcha').click(function() {
 				$.ajax({
 					cache: false,
 					method: 'GET',
@@ -173,7 +173,7 @@
 <div class="form-group">
 
 	<span class="col-lg-offset-4"><img id='img' src="/static/{{img}}" width="200" height="50"></span>
-	<span><button type="button" class="btn btn-primary btn-xs">ReCaptcha</button>
+	<span><button id="recaptcha" type="button" class="btn btn-primary btn-xs">ReCaptcha</button>
 </span>
 </div>
 <!-- </div> -->
@@ -192,7 +192,7 @@
 <div class="form-group">
   <div class="col-lg-8 col-lg-offset-3">
 	<!-- <button type="reset" class="btn btn-default">Cancel</button> -->
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button id="submit" type="submit" class="btn btn-primary">Submit</button>
   </div>
 </div>
 

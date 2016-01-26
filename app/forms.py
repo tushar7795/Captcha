@@ -14,8 +14,8 @@ class RegistrationForm(Form):
     first_name = StringField('first_name', validators=[DataRequired()])
     middle_name = StringField('middle_name', validators=[])
     last_name = StringField('last_name', validators=[DataRequired()])
-    gender = RadioField('gender', choices=[('male', 'male'),
-                                           ('female', 'female')])
+    gender = RadioField('gender', choices=[('male', 'Male'),
+                                           ('female', 'Female')])
     birthdate = DateField('birthdate')
     blood_group = SelectField('blood_group', choices=blood_types,
                               validators=[DataRequired()])

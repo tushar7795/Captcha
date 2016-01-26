@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session
 from app import app, db
 # from .forms import LoginForm
 from .forms import RegistrationForm
@@ -9,6 +9,25 @@ import ImageFont
 from random import randint
 # from flask_recaptcha import ReCaptcha
 import json
+
+
+def random_generator():
+    sans16 = ImageFont.truetype('/Users/speedster/codes/Captcha/app/arial.ttf', 25)
+    random = ''
+    for i in range(6):
+        r = randint(33, 122)
+        random = random + chr(r)
+
+    im = Image.new("RGB", (200, 50), "#ddd")
+    draw = ImageDraw.Draw(im)
+    draw.text((10, 10), random, font=sans16, fill="red")
+    draw.line((0, 50, 200, 0), fill=128)
+    draw.line((0, 200, 50, 0), fill=128)
+    draw.line((30, 50, 200, 20), fill=128)
+    # draw.line((0, 50, 200, 0), fill=128)
+
+    im.save("/Users/speedster/codes/Captcha/app/static/mmm.png")
+    return ('mmm.png?dummy='+str(randint(1, 100000)), random)
 
 
 @app.route('/')
@@ -39,9 +58,7 @@ def index():
 def register():
 
     form = RegistrationForm()
-    file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'r')
-    random = file.read()
-    if form.validate_on_submit() and form.captcha.data == random:
+    if form.validate_on_submit() and form.captcha.data == session['captcha']:
         # flash('%s%s%s%s%s%s%s' % (form.first_name.data,
         #                           form.middle_name.data,
         #                           form.last_name.data,
@@ -68,13 +85,13 @@ def register():
         db.session.commit()
         # flash(' %s %s' % (form.city.data, form.country.data))
         return redirect(url_for('index'))
-    elif form.validate_on_submit() and form.captcha.data != random:
-        form.captcha.errors.append("Please enter valid captcha")
-    # imgg = random_generator()
+    elif form.validate_on_submit() and form.captcha.data != session['captcha']:
+        form.captcha.errors.append("Please enter valid captcha  "+session['captcha'])
+    (imgg, session['captcha']) = random_generator()
     return render_template('registration.html',
                            title='Registration Form',
                            form=form,
-                           img=random_generator())
+                           img=imgg)
 
 
 @app.route('/date')
@@ -82,34 +99,8 @@ def datePicker():
     return render_template('datePicker.html')
 
 
-def random_generator():
-    sans16 = ImageFont.truetype('/Users/speedster/codes/Captcha/app/arial.ttf', 25)
-    random = ''
-    for i in range(6):
-        r = randint(33, 122)
-        random = random + chr(r)
-    # rf = open("/Users/speedster/codes/Captcha/app/static/no.txt", 'r')
-    # rff = rf.read()
-    # rfile = (int(rff) + 1) % 3
-    im = Image.new("RGB", (200, 50), "#ddd")
-    draw = ImageDraw.Draw(im)
-    draw.text((10, 10), random, font=sans16, fill="red")
-    draw.line((0, 50, 200, 0), fill=128)
-    draw.line((0, 200, 50, 0), fill=128)
-    draw.line((30, 50, 200, 20), fill=128)
-    # draw.line((0, 50, 200, 0), fill=128)
-
-    im.save("/Users/speedster/codes/Captcha/app/static/mmm.png")  # +str(rfile)+
-    file = open("/Users/speedster/codes/Captcha/app/static/pin.txt", 'w')
-    file.write(random)
-    # rf = open("/Users/speedster/codes/Captcha/app/static/no.txt", 'w')
-    # rf.write(str(rfile))
-    # rf.close()
-    file.close()
-    return 'mmm.png?dummy='+str(randint(1, 100000))
-
-
 @app.route('/recaptcha')
 def reCaptcha():
-    url = '/static/'+random_generator()
+    (img, session['captcha']) = random_generator()
+    url = '/static/'+img
     return json.dumps({'url': url}), 200, {'Content-Type': 'application/json'}
