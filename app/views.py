@@ -3,16 +3,18 @@ from app import app, db
 # from .forms import LoginForm
 from .forms import RegistrationForm
 from .models import Doctor
-import Image
-import ImageDraw
-import ImageFont
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 from random import randint
+import os
 # from flask_recaptcha import ReCaptcha
 import json
 
 
 def random_generator():
-    sans16 = ImageFont.truetype('/Users/speedster/codes/Captcha/app/arial.ttf', 25)
+    directory = os.path.dirname(os.path.abspath(__file__))
+    sans16 = ImageFont.truetype(directory+'/arial.ttf', 25)
     random = ''
     for i in range(6):
         r = randint(33, 122)
@@ -26,7 +28,7 @@ def random_generator():
     draw.line((30, 50, 200, 20), fill=128)
     # draw.line((0, 50, 200, 0), fill=128)
 
-    im.save("/Users/speedster/codes/Captcha/app/static/mmm.png")
+    im.save(directory+"/static/mmm.png", 'PNG')
     return ('mmm.png?dummy='+str(randint(1, 100000)), random)
 
 

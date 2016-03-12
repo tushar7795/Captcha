@@ -11,7 +11,7 @@ OPENID_PROVIDERS = [
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-SQLALCHEMY_DATABASE_URI = os.enviorn.get('DATABASE_URL') or 'mysql+pymysql://root:@localhost/captcha'
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mysql+pymysql://root:@localhost/captcha'
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 MAIL_SERVER = 'smtp.googlemail.com'
