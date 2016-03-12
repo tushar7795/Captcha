@@ -44,3 +44,4 @@ wheel==0.24.0
 Whoosh==2.7.0
 WTForms==2.1
 wtforms-recaptcha==0.3.2
+psycopg2==2.4.5
