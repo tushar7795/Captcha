@@ -17,18 +17,15 @@ Then activate the virtual environment using following command:
 ```shell
 $ source flask/bin/activate
 ```
-Now install Flask and necessary extensions using following command: 
-```shell
-(flask) $ pip install flask
-(flask) $ pip install flask-sqlalchemy
-(flask) $ pip install sqlalchemy-migrate
-(flask) $ pip install flask-wtf
-(flask) $ pip install flask-bootstrap
-```
 
 Then clone this project using following command:
 ```git
 $ git clone https://github.com/tushar7795/Captcha.git
+```
+
+Now install Flask and necessary extensions using following command: 
+```shell
+(flask) $ pip install -r requirements.txt
 ```
 
 # Usage
@@ -41,5 +38,5 @@ Now you can run server by running only *run.py*.
 $ ./run.py
 ```
 
-Now open [http://localhost:5000/registration](http://localhost:5000/registration) in your browser to open registration form. 
+Now open [http://localhost:5000/](http://localhost:5000/) in your browser to open web application. 
 
